@@ -183,7 +183,7 @@ const CreateHotel = () => {
                 className="input-field"
                 required
               >
-                <option value="XOF">F XOF</option>
+                <option value="XOF"> XOF</option>
                 <option value="EUR">EUR</option>
                 <option value="USD">USD</option>
               </select>

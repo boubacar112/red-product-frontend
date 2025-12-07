@@ -7,11 +7,6 @@ const HotelList = () => {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filters, setFilters] = useState({
-    prix_min: '',
-    prix_max: '',
-    devise: '',
-  });
 
   useEffect(() => {
     fetchHotels();
@@ -21,7 +16,6 @@ const HotelList = () => {
     try {
       const params = {
         search: searchTerm,
-        ...filters,
       };
       const response = await hotelAPI.getHotels(params);
       if (response.success) {
@@ -81,7 +75,7 @@ const HotelList = () => {
         </Link>
       </div>
 
-      {/* Search & Filters */}
+      {/* Search */}
       <div className="bg-white rounded-lg p-4 mb-6 shadow-sm">
         <form onSubmit={handleSearch} className="flex gap-4">
           <input
@@ -90,20 +84,6 @@ const HotelList = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="flex-1 input-field"
-          />
-          <input
-            type="number"
-            placeholder="Prix min"
-            value={filters.prix_min}
-            onChange={(e) => setFilters({ ...filters, prix_min: e.target.value })}
-            className="w-32 input-field"
-          />
-          <input
-            type="number"
-            placeholder="Prix max"
-            value={filters.prix_max}
-            onChange={(e) => setFilters({ ...filters, prix_max: e.target.value })}
-            className="w-32 input-field"
           />
           <button type="submit" className="btn-primary">
             Rechercher

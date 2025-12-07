@@ -9,7 +9,14 @@ export const hotelAPI = {
 
   // Obtenir la liste des hôtels avec filtres
   getHotels: async (params = {}) => {
-    const response = await axios.get('/hotels', { params });
+    // Filtrer les paramètres vides pour éviter les erreurs 500 du backend
+    const filteredParams = {};
+    for (const [key, value] of Object.entries(params)) {
+      if (value !== '' && value !== null && value !== undefined) {
+        filteredParams[key] = value;
+      }
+    }
+    const response = await axios.get('/hotels', { params: filteredParams });
     return response.data;
   },
 
